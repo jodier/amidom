@@ -1,0 +1,70 @@
+{
+    "accordion": {
+        "clazz": "AccordionCtrl",
+        "file": "controls/Accordion/js/AccordionCtrl.js"
+    },
+    "confirmBox": {
+        "clazz": "ConfirmBoxCtrl",
+        "file": "controls/ConfirmBox/js/ConfirmBoxCtrl.js"
+    },
+    "diffBox": {
+        "clazz": "DiffBoxCtrl",
+        "file": "controls/DiffBox/js/DiffBoxCtrl.js"
+    },
+    "editBox": {
+        "clazz": "EditBoxCtrl",
+        "file": "controls/EditBox/js/EditBoxCtrl.js"
+    },
+    "elementInfo": {
+        "clazz": "ElementInfoCtrl",
+        "file": "controls/ElementInfo/js/ElementInfoCtrl.js"
+    },
+    "fieldEditor": {
+        "clazz": "FieldEditorCtrl",
+        "file": "controls/FieldEditor/js/FieldEditorCtrl.js"
+    },
+    "fixTWikiStyle": {
+        "clazz": "FixTWikiStyleCtrl",
+        "file": "controls/FixTWikiStyle/js/FixTWikiStyleCtrl.js"
+    },
+    "graph": {
+        "clazz": "GraphCtrl",
+        "file": "controls/Graph/js/GraphCtrl.js"
+    },
+    "mediaViewer": {
+        "clazz": "MediaViewerCtrl",
+        "file": "controls/MediaViewer/js/MediaViewerCtrl.js"
+    },
+    "messageBox": {
+        "clazz": "MessageBoxCtrl",
+        "file": "controls/MessageBox/js/MessageBoxCtrl.js"
+    },
+    "schema": {
+        "clazz": "SchemaCtrl",
+        "file": "controls/Schema/js/SchemaCtrl.js"
+    },
+    "search": {
+        "clazz": "SearchCtrl",
+        "file": "controls/Search/js/SearchCtrl.js"
+    },
+    "simpleSearch": {
+        "clazz": "SimpleSearchCtrl",
+        "file": "controls/SimpleSearch/js/SimpleSearchCtrl.js"
+    },
+    "tab": {
+        "clazz": "TabCtrl",
+        "file": "controls/Tab/js/TabCtrl.js"
+    },
+    "table": {
+        "clazz": "TableCtrl",
+        "file": "controls/Table/js/TableCtrl.js"
+    },
+    "textBox": {
+        "clazz": "TextBoxCtrl",
+        "file": "controls/TextBox/js/TextBoxCtrl.js"
+    },
+    "unitEditor": {
+        "clazz": "UnitEditorCtrl",
+        "file": "controls/UnitEditor/js/UnitEditorCtrl.js"
+    }
+}
