@@ -3,24 +3,21 @@
 /* GENERAL THEME                                                           */
 /*-------------------------------------------------------------------------*/
 
+html,
 body {
-	background-image: url('{{ORIGIN_URL}}/subapps/DomDashboard/images/cloud.png');
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
+	background: url('{{ORIGIN_URL}}/subapps/DomDashboard/images/cloud.png') #B9D5EC bottom;
 	background-size: cover;
-	background-position: top;
+	height: 100%;
 }
 
 /*-------------------------------------------------------------------------*/
 /* AMI THEME                                                               */
 /*-------------------------------------------------------------------------*/
 
-#ami_main_center {
+#ami_main_content {
+	height: calc(100% - 60px);
 	margin: 0;
 	padding: 8px 16px;
-	overflow-x: hidden;
-	overflow-y: auto;
 }
 
 /*-------------------------------------------------------------------------*/
@@ -47,10 +44,4 @@ body {
 
 </nav>
 
-<div id="ami_main_center">
-<!--
-	<ul class="breadcrumb" id="ami_breadcrumb_content">&nbsp;</ul>
--->
-	<div role="main" id="ami_main_content"></div>
-
-</div>
+<div role="main" id="ami_main_content"></div>

@@ -25,6 +25,10 @@ $AMIClass('DomDashboardApp', {
 		amiWebApp.loadResources([
 			'subapps/DomDashboard/css/DomDashboardApp.css',
 			'subapps/DomDashboard/twig/DomDashboardApp.twig',
+			/**/
+			amiWebApp.originURL + '/subapps/DomDashboard/js/web-animations.min.js',
+			amiWebApp.originURL + '/subapps/DomDashboard/js/hammer.min.js',
+			amiWebApp.originURL + '/subapps/DomDashboard/js/muuri.min.js',
 		], {context: this}).done(function(data) {
 
 			amiWebApp.replaceHTML('#ami_main_content', data[1], {context: this}).done(function() {
@@ -50,6 +54,26 @@ $AMIClass('DomDashboardApp', {
 
 	onLogin: function()
 	{
+		var dragSortOptions = {
+		  action: 'swap',
+		  threshold: 50
+		};
+
+		this.grid = new Muuri('.grid', {
+		  dragEnabled: true,
+		  dragStartPredicate: function (item, event) {
+			// Prevent first item from being dragged. 
+			if (grid.getItems().indexOf(item) === 0) {
+			  return false;
+			}
+			// For other items use the default drag start predicate.
+			return Muuri.ItemDrag.defaultStartPredicate(item, event);
+		  },
+		  dragSortPredicate: function (item) {
+			var result = Muuri.ItemDrag.defaultSortPredicate(item, dragSortOptions);
+			return result && result.index === 0 ? false : result;
+		  }
+		});
 	},
 
 	/*---------------------------------------------------------------------*/
@@ -68,3 +92,4 @@ $AMIClass('DomDashboardApp', {
 var domDashboardApp = new DomDashboardApp();
 
 /*-------------------------------------------------------------------------*/
+
