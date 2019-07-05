@@ -1,0 +1,56 @@
+<style type="text/css">
+/*-------------------------------------------------------------------------*/
+/* GENERAL THEME                                                           */
+/*-------------------------------------------------------------------------*/
+
+body {
+	background-image: url('{{ORIGIN_URL}}/subapps/DomDashboard/images/cloud.png');
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: top;
+}
+
+/*-------------------------------------------------------------------------*/
+/* AMI THEME                                                               */
+/*-------------------------------------------------------------------------*/
+
+#ami_main_center {
+	margin: 0;
+	padding: 8px 16px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/*-------------------------------------------------------------------------*/
+</style>
+
+<div role="alert" id="ami_alert_content" style="top: 80px;"></div>
+
+<nav class="navbar navbar-light navbar-expand-lg bg-light" id="ami_top_menu">
+
+	<a class="navbar-brand py-0" href="{{HOME_URL}}">
+		<img src="{{LOGO_URL}}" alt="Logo" style="height: 38px;" />
+	</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FCE61AFD_012B_2816_B9FD_C737908FAF72">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="FCE61AFD_012B_2816_B9FD_C737908FAF72">
+
+		<ul class="navbar-nav mr-auto" id="ami_main_menu_content"></ul>
+		<ul class="navbar-nav ml-auto" id="ami_login_menu_content"></ul>
+
+	</div>
+
+</nav>
+
+<div id="ami_main_center">
+<!--
+	<ul class="breadcrumb" id="ami_breadcrumb_content">&nbsp;</ul>
+-->
+	<div role="main" id="ami_main_content"></div>
+
+</div>
