@@ -1,0 +1,41 @@
+<!--
+ * AMI Web Framework
+ *
+ * Copyright (c) 2014-XXXX The AMI Team / LPSC / CNRS
+ *
+ * This file must be used under the terms of the CeCILL-C:
+ * http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+ * http://www.cecill.info/licences/Licence_CeCILL-C_V1-fr.html
+ *
+-->
+
+<div class="card h-100">
+	<div class="card-header d-flex px-2 py-0">
+		<span class="mr-auto">
+			{{title|e}}
+		</span>
+		<strong id="C31E9D58_400D_7CF9_4CBF_D981A2DF2523">
+			{{value|e}}
+		</strong>
+		<strong>
+			&nbsp;/&nbsp;{{max|e}}
+		</strong>
+	</div>
+	<div class="card-body px-2 py-1">
+		<div class="row">
+			<div class="col-3 text-center">
+				<a href="#">
+					<i class="fa fa-3x fa-{{image|e}}"></i>
+				</a>
+			</div>
+			<div class="col-9">
+				<div class="text-left">
+					{{text|e}}
+				</div>
+				<div class="text-center">
+					<input type="range" class="custom-range" min="{{min|e}}" max="{{max|e}}" step="{{step|e}}" value="{{value|e}}" id="F5D2F029_12AC_1E5B_3FD6_B466587082DA" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

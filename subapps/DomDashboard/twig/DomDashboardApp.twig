@@ -9,114 +9,13 @@
  *
 -->
 
-<style>
-
-	.grid {
-		position: relative;
-	}
-
-	.item {
-		display: block;
-		position: absolute;
-		width: 100px;
-		height: 100px;
-		margin: 5px;
-		z-index: 1;
-		background: #000;
-		color: #fff;
-	}
-
-	.item.muuri-item-dragging {
-		z-index: 3;
-	}
-
-	.item.muuri-item-releasing {
-		z-index: 2;
-	}
-
-	.item.muuri-item-hidden {
-		z-index: 0;
-	}
-
-	.item-content {
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
-
-</style>
-
-<div class="grid">
-
-	<div class="item">
-		<div class="item-content">
-			<!-- Safe zone, enter your custom markup -->
-			This can be anything.
-			<!-- Safe zone ends -->
-		</div>
-	</div>
-
-	<div class="item">
-		<div class="item-content">
-			<!-- Safe zone, enter your custom markup -->
-			<div class="my-custom-content">
-				Yippee!
-			</div>
-			<!-- Safe zone ends -->
-		</div>
-	</div>
-
+<div class="grid-stack" id="F251696F_D42E_F7FF_86F7_2E6B4F2E8F74">
+	<span style="position: absolute; right: 0;">
+		<a href="#" class="btn btn-sm btn-primary" id="ADADA8BA_794E_4AA3_BE47_E214554931FC">
+			<i class="fa fa-plus"></i>
+		</a>
+		<a href="#" class="btn btn-sm btn-primary" id="BC0C838B_4E57_5E35_C76D_923F8B5B98D7">
+			<i class="fa fa-refresh"></i>
+		</a>
+	</span>
 </div>
-
-<script>
-
-	var grid = new Muuri('.grid');
-
-</script>
-
-<!--
-
-<style type="text/css">
-
-.gridly {
-	background-color: red;
-	position: relative;
-	background-color: red;
-	height: 100%;
-	width: 100%;
-}
-
-.brick.small {
-	background-color: green;
-	width: 140px;
-	height: 140px;
-}
-
-.brick.large {
-	background-color: blue;
-	width: 300px;
-	height: 300px;
-	}
-
-</style>
-
-<div class="gridly">
-	<div class="brick small">A</div>
-	<div class="brick small">B</div>
-	<div class="brick large">C</div>
-	<div class="brick small">D</div>
-	<div class="brick small">E</div>
-	<div class="brick large">F</div>
-</div>
-
-<script>
-
-$('.gridly').gridly({
-	base: 60, // px 
-	gutter: 20, // px
-	columns: 12
-});
-
-</script>
-
--->

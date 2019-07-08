@@ -1,0 +1,38 @@
+<!--
+ * AMI Web Framework
+ *
+ * Copyright (c) 2014-XXXX The AMI Team / LPSC / CNRS
+ *
+ * This file must be used under the terms of the CeCILL-C:
+ * http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+ * http://www.cecill.info/licences/Licence_CeCILL-C_V1-fr.html
+ *
+-->
+
+<div class="card h-100">
+	<div class="card-header d-flex px-2 py-0">
+		<span class="mr-auto">
+			{{title|e}}
+		</span>
+		<strong>
+			{{subTitle|e}}
+		</strong>
+	</div>
+	<div class="card-body px-2 py-1">
+		<div class="row">
+			<div class="col-3 text-center">
+				<a href="#">
+					<i class="fa fa-3x fa-{{image|e}}"></i>
+				</a>
+			</div>
+			<div class="col-9">
+				<div class="text-left">
+					{{text|e}}
+				</div>
+				<div class="text-right">
+					<small>{{dateTime|e}}</small>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

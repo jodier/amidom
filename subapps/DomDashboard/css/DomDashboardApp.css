@@ -9,37 +9,24 @@
  *
  */
 
-.grid {
-	position: relative;
-	height: 100%;
-	width: 100%;
+.grid-stack-item-content {
+	background-color: rgba(231, 242, 250, 0.4);
+	border-radius: 8px;
 }
 
-.item {
-	display: block;
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	margin: 5px;
-	z-index: 1;
-	background: #000;
-	color: #fff;
+.grid-stack-item-content .card {
+	background: none transparent;
+	border-radius: 8px;
 }
 
-.item.muuri-item-dragging {
-	z-index: 3;
+.grid-stack-item-content .card-header {
+	background: none rgba(255, 255, 255, 0.2);
+	border-radius-top-left: 8px;
+	border-radius-top-right: 8px;
 }
 
-.item.muuri-item-releasing {
-	z-index: 2;
-}
-
-.item.muuri-item-hidden {
-	z-index: 0;
-}
-
-.item-content {
-	position: relative;
-	width: 100%;
-	height: 100%;
+.grid-stack-item-content .card-body {
+	background: none rgba(255, 255, 255, 0.0);
+	border-radius-bottom-left: 8px;
+	border-radius-bottom-right: 8px;
 }

@@ -11,6 +11,18 @@
         "clazz": "DiffBoxCtrl",
         "file": "controls/DiffBox/js/DiffBoxCtrl.js"
     },
+    "domRange": {
+        "clazz": "DomRangeCtrl",
+        "file": "controls/DomRange/js/DomRangeCtrl.js"
+    },
+    "domSwitch": {
+        "clazz": "DomSwitchCtrl",
+        "file": "controls/DomSwitch/js/DomSwitchCtrl.js"
+    },
+    "domText": {
+        "clazz": "DomTextCtrl",
+        "file": "controls/DomText/js/DomTextCtrl.js"
+    },
     "editBox": {
         "clazz": "EditBoxCtrl",
         "file": "controls/EditBox/js/EditBoxCtrl.js"
