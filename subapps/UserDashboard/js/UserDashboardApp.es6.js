@@ -49,8 +49,6 @@ $AMIClass('UserDashboardApp', {
 
 				this.ctrls = [];
 
-				this.cnt = 0;
-
 				/*---------------------------------------------------------*/
 
 				result.resolve();
@@ -63,6 +61,7 @@ $AMIClass('UserDashboardApp', {
 
 		return result;
 	},
+
 	/*---------------------------------------------------------------------*/
 
 	onLogin: function()
@@ -72,19 +71,29 @@ $AMIClass('UserDashboardApp', {
 		$('#ami_user_menu_content').html(
 			'<div class="dropdown-divider"></div>'
 			+
-			'<a class="dropdown-item" href="javascript:(() => { userDashboardApp.reload(); return; })();">reload dashboard</a>'
+			'<a class="dropdown-item" href="javascript:(function() { amiWebApp.lock(); userDashboardApp.reload().done(function() { amiWebApp.unlock(); }).fail(function(message) { amiWebApp.error(message); }); return; })();">Reload dashboard</a>'
 			+
 			'<a class="dropdown-item" href="' + amiWebApp.webAppURL + '?subapp=dashboardAdmin" target="_blank">Admin dashboard</a>'
 		);
 
 		/*-----------------------------------------------------------------*/
 
-		this.reload().done(() => {
+		return this.reload().done(() => {
 
-			if(!this.interval)
-			{
-				this.interval = setInterval(() => this.refresh(), 5000);
-			}
+			this.interval = setInterval(() => {
+
+				amiWebApp.lock();
+
+				this.refresh().done(() => {
+
+					amiWebApp.unlock();
+
+				}).fail((message) => {
+
+					amiWebApp.error(message);
+				});
+
+			}, 5000);
 		});
 
 		/*-----------------------------------------------------------------*/
@@ -92,16 +101,27 @@ $AMIClass('UserDashboardApp', {
 
 	/*---------------------------------------------------------------------*/
 
-	_reload: function(result, rows)
+	onLogout: function()
 	{
-		if(rows.length === 0)
+		$('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').empty();
+
+		clearInterval(this.interval);
+
+		this.ctrls = [];
+	},
+
+	/*---------------------------------------------------------------------*/
+
+	__reload: function(result, rows, idx)
+	{
+		if(idx === rows.length)
 		{
 			return result.resolve();
 		}
 
 		/*-----------------------------------------------------------------*/
 
-		const row = rows.shift();
+		const row = rows[idx];
 
 		/*-----------------------------------------------------------------*/
 
@@ -114,7 +134,7 @@ $AMIClass('UserDashboardApp', {
 
 		/*-----------------------------------------------------------------*/
 
-		var id = 'EB4DF671_2C31_BED0_6BED_44790525F28F_' + (this.cnt++);
+		var id = 'EB4DF671_2C31_BED0_6BED_44790525F28F_' + idx;
 
 		/*-----------------------------------------------------------------*/
 
@@ -122,7 +142,7 @@ $AMIClass('UserDashboardApp', {
 
 			amiWebApp.createControl(this, this, control, ['#' + id].concat(JSON.parse(params)), {}).done((ctrl) => {
 
-				this._reload(result, rows);
+				this.__reload(result, rows, idx + 1);
 
 				this.ctrls.push(ctrl);
 
@@ -137,54 +157,95 @@ $AMIClass('UserDashboardApp', {
 
 	/*---------------------------------------------------------------------*/
 
-	reload: function()
+	_reload: function(rows)
 	{
-		amiWebApp.lock();
-
 		var result = $.Deferred();
 
-		amiCommand.execute('GetDashboardInfo').done((data) => {
-
-			/*-------------------------------------------------------------*/
-
-			this.ctrls = [];
-
-			/*-------------------------------------------------------------*/
-
-			$('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').find('div').remove();
-
-			this._reload(result, amiWebApp.jspath('..row', data));
-
-			/*-------------------------------------------------------------*/
-
-			result.done(() => {
-
-				amiWebApp.unlock();
-
-			}).fail((message) => {
-
-				amiWebApp.error(message);
-			});
-
-		}).fail((data, message) => {
-
-			amiWebApp.error(message);
-		});
+		this.__reload(result, rows, 0);
 
 		return result;
 	},
 
 	/*---------------------------------------------------------------------*/
 
+	reload: function()
+	{
+		var result = $.Deferred();
+
+		/*-----------------------------------------------------------------*/
+
+		amiCommand.execute('GetDashboardInfo').done((data) => {
+
+			/*-------------------------------------------------------------*/
+
+			$('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').empty();
+
+			this.ctrls = [];
+
+			/*-------------------------------------------------------------*/
+
+			this._reload(amiWebApp.jspath('..row', data)).done(() => {
+
+				this.refresh().done(() => {
+
+					result.resolve();
+
+				}).fail((message) => {
+
+					result.resolve(message);
+				});
+
+			}).fail((message) => {
+
+				result.resolve(message);
+			});
+
+		}).fail((data, message) => {
+
+			result.resolve(message);
+		});
+
+		/*-----------------------------------------------------------------*/
+
+		return result;
+	},
+
+	/*---------------------------------------------------------------------*/
+
+	_refresh: function(result, ctrls, idx)
+	{
+		if(idx === ctrls.length)
+		{
+			return result.resolve();
+		}
+
+		/*-----------------------------------------------------------------*/
+
+		const ctrl = ctrls[idx];
+
+		/*-----------------------------------------------------------------*/
+
+		_ami_internal_then(ctrl.refresh ? ctrl.refresh() : null, () => {
+
+			this._refresh(result, ctrls, idx + 1);
+
+		}, (message) => {
+
+			result.reject(message);
+		});
+
+		/*-----------------------------------------------------------------*/
+	},
+
+	/*---------------------------------------------------------------------*/
+
 	refresh: function()
 	{
-		this.ctrls.forEach((ctrl, indx) => {
+		var result = $.Deferred();
 
-			if(ctrl.refresh)
-			{
-				ctrl.refresh();
-			}
-		});
+		this._refresh(result, this.ctrls, 0);
+
+		return result;
 	},
 
 	/*---------------------------------------------------------------------*/
