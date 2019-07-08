@@ -11,7 +11,7 @@
 
 /*-------------------------------------------------------------------------*/
 
-$AMIClass('DomDashboardApp', {
+$AMIClass('UserDashboardApp', {
 	/*---------------------------------------------------------------------*/
 
 	$extends: ami.SubApp,
@@ -23,13 +23,13 @@ $AMIClass('DomDashboardApp', {
 		var result = $.Deferred();
 
 		amiWebApp.loadResources([
-			'subapps/DomDashboard/css/DomDashboardApp.css',
-			'subapps/DomDashboard/twig/DomDashboardApp.twig',
+			'subapps/UserDashboard/css/UserDashboardApp.css',
+			'subapps/UserDashboard/twig/UserDashboardApp.twig',
 			/**/
 			amiWebApp.originURL + '/js/3rd-party/jquery-ui.min.js',
 			/**/
-			amiWebApp.originURL + '/subapps/DomDashboard/js/gridstack.min.css',
-			amiWebApp.originURL + '/subapps/DomDashboard/js/gridstack.all.js',
+			amiWebApp.originURL + '/subapps/UserDashboard/js/gridstack.min.css',
+			amiWebApp.originURL + '/subapps/UserDashboard/js/gridstack.all.js',
 		]).done((data) => {
 
 			amiWebApp.replaceHTML('#ami_main_content', data[1]).done(() => {
@@ -157,6 +157,6 @@ $AMIClass('DomDashboardApp', {
 /* GLOBAL INSTANCE                                                         */
 /*-------------------------------------------------------------------------*/
 
-var domDashboardApp = new DomDashboardApp();
+var userDashboardApp = new UserDashboardApp();
 
 /*-------------------------------------------------------------------------*/

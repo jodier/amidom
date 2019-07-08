@@ -66,7 +66,7 @@
 
 			amiWebApp.onReady = function()
 			{
-				return amiWebApp.loadSubAppByURL('domDashboard');
+				return amiWebApp.loadSubAppByURL('userDashboard');
 			};
 
 		</script>
@@ -77,8 +77,8 @@
 
 			var subapp = new URL(window.location.href).searchParams.get('subapp');
 
-			var theme_url = !subapp || subapp.toLowerCase() === 'domdashboard' ? 'subapps/DomDashboard/themes/cloud.twig'
-				                                                               : 'twig/AMI/Theme/white.twig'
+			var theme_url = !subapp || subapp.toLowerCase() === 'userdashboard' ? 'subapps/UserDashboard/themes/cloud.twig'
+				                                                                : 'twig/AMI/Theme/white.twig'
 			;
 
 			amiWebApp.start({
