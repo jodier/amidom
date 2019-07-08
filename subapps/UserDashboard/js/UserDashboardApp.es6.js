@@ -45,6 +45,8 @@ $AMIClass('UserDashboardApp', {
 
 				this.grid = $('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').gridstack(opts).data('gridstack');
 
+				this.hand = null;
+
 				this.cnt = 0;
 
 				/*---------------------------------------------------------*/
@@ -66,17 +68,22 @@ $AMIClass('UserDashboardApp', {
 		$('#ami_user_menu_content').html(
 			'<div class="dropdown-divider"></div>'
 			+
-			'<a class="dropdown-item" href="javascript:(() => { userDashboardApp.refresh(); return; })();">Refresh dashboard</a>'
+			'<a class="dropdown-item" href="javascript:(() => { userDashboardApp.reload(); return; })();">reload dashboard</a>'
 			+
 			'<a class="dropdown-item" href="' + amiWebApp.webAppURL + '?subapp=dashboardAdmin" target="_blank">Admin dashboard</a>'
 		);
 
-		this.refresh();
+		if(this.hand === null)
+		{
+			setInterval(() => this.refresh(), 5000);
+		}
+
+		this.reload();
 	},
 
 	/*---------------------------------------------------------------------*/
 
-	_refresh: function(result, rows)
+	_reload: function(result, rows)
 	{
 		if(rows.length === 0)
 		{
@@ -104,7 +111,7 @@ $AMIClass('UserDashboardApp', {
 
 			amiWebApp.createControl(this, this, control, ['#' + id].concat(JSON.parse(params)), {}).done(() => {
 
-				this._refresh(result, rows);
+				this._reload(result, rows);
 
 			}).fail((message) => {
 
@@ -117,7 +124,7 @@ $AMIClass('UserDashboardApp', {
 
 	/*---------------------------------------------------------------------*/
 
-	refresh: function()
+	reload: function()
 	{
 		amiWebApp.lock();
 
@@ -127,7 +134,7 @@ $AMIClass('UserDashboardApp', {
 
 			$('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').find('div').remove();
 
-			this._refresh(result, amiWebApp.jspath('..row', data));
+			this._reload(result, amiWebApp.jspath('..row', data));
 
 			result.done(() => {
 
@@ -144,6 +151,13 @@ $AMIClass('UserDashboardApp', {
 		});
 
 		return result;
+	},
+
+	/*---------------------------------------------------------------------*/
+
+	refresh: function()
+	{
+		console.log('refresh');
 	},
 
 	/*---------------------------------------------------------------------*/
