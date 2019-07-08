@@ -49,18 +49,6 @@ $AMIClass('UserDashboardApp', {
 
 				/*---------------------------------------------------------*/
 
-				$('#ADADA8BA_794E_4AA3_BE47_E214554931FC').click(() => {
-
-					this.addWidget();
-				});
-
-				$('#BC0C838B_4E57_5E35_C76D_923F8B5B98D7').click(() => {
-
-					this.refresh();
-				});
-
-				/*---------------------------------------------------------*/
-
 				result.resolve();
 			});
 
@@ -75,6 +63,14 @@ $AMIClass('UserDashboardApp', {
 
 	onLogin: function()
 	{
+		$('#ami_user_menu_content').html(
+			'<div class="dropdown-divider"></div>'
+			+
+			'<a class="dropdown-item" href="javascript:(() => { userDashboardApp.refresh(); return; })();">Refresh dashboard</a>'
+			+
+			'<a class="dropdown-item" href="' + amiWebApp.webAppURL + '?subapp=dashboardAdmin" target="_blank">Admin dashboard</a>'
+		);
+
 		this.refresh();
 	},
 
