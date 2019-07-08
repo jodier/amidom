@@ -45,7 +45,9 @@ $AMIClass('UserDashboardApp', {
 
 				this.grid = $('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').gridstack(opts).data('gridstack');
 
-				this.hand = null;
+				/*---------------------------------------------------------*/
+
+				this.ctrls = [];
 
 				this.cnt = 0;
 
@@ -65,6 +67,8 @@ $AMIClass('UserDashboardApp', {
 
 	onLogin: function()
 	{
+		/*-----------------------------------------------------------------*/
+
 		$('#ami_user_menu_content').html(
 			'<div class="dropdown-divider"></div>'
 			+
@@ -73,12 +77,17 @@ $AMIClass('UserDashboardApp', {
 			'<a class="dropdown-item" href="' + amiWebApp.webAppURL + '?subapp=dashboardAdmin" target="_blank">Admin dashboard</a>'
 		);
 
-		if(this.hand === null)
-		{
-			setInterval(() => this.refresh(), 5000);
-		}
+		/*-----------------------------------------------------------------*/
 
-		this.reload();
+		this.reload().done(() => {
+
+			if(!this.interval)
+			{
+				this.interval = setInterval(() => this.refresh(), 5000);
+			}
+		});
+
+		/*-----------------------------------------------------------------*/
 	},
 
 	/*---------------------------------------------------------------------*/
@@ -107,11 +116,15 @@ $AMIClass('UserDashboardApp', {
 
 		var id = 'EB4DF671_2C31_BED0_6BED_44790525F28F_' + (this.cnt++);
 
+		/*-----------------------------------------------------------------*/
+
 		this.grid.addWidget($('<div><div class="grid-stack-item-content" id="' + id + '"></div></div>'), x, y, width, height).promise().done(() => {
 
-			amiWebApp.createControl(this, this, control, ['#' + id].concat(JSON.parse(params)), {}).done(() => {
+			amiWebApp.createControl(this, this, control, ['#' + id].concat(JSON.parse(params)), {}).done((ctrl) => {
 
 				this._reload(result, rows);
+
+				this.ctrls.push(ctrl);
 
 			}).fail((message) => {
 
@@ -132,9 +145,17 @@ $AMIClass('UserDashboardApp', {
 
 		amiCommand.execute('GetDashboardInfo').done((data) => {
 
+			/*-------------------------------------------------------------*/
+
+			this.ctrls = [];
+
+			/*-------------------------------------------------------------*/
+
 			$('#F251696F_D42E_F7FF_86F7_2E6B4F2E8F74').find('div').remove();
 
 			this._reload(result, amiWebApp.jspath('..row', data));
+
+			/*-------------------------------------------------------------*/
 
 			result.done(() => {
 
@@ -157,7 +178,13 @@ $AMIClass('UserDashboardApp', {
 
 	refresh: function()
 	{
-		console.log('refresh');
+		this.ctrls.forEach((ctrl, indx) => {
+
+			if(ctrl.refresh)
+			{
+				ctrl.refresh();
+			}
+		});
 	},
 
 	/*---------------------------------------------------------------------*/
