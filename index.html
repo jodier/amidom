@@ -71,7 +71,7 @@
 
 			var subapp = new URL(window.location.href).searchParams.get('subapp');
 
-			var theme_url = !subapp || subapp.toLowerCase() === 'userdashboard' ? 'subapps/UserDashboard/themes/cloud.twig'
+			var theme_url = !subapp || subapp.toLowerCase() === 'userdashboard' ? 'twig/AMI/Theme/cloud.twig'
 				                                                                : 'twig/AMI/Theme/white.twig'
 			;
 
